@@ -1,4 +1,4 @@
-version: "3"
+version: "3.3"
 services:
   nuxt:
     container_name: nuxt
@@ -7,6 +7,10 @@ services:
     - ./nuxt:/nuxt
     environment:
       - HOST=0.0.0.0
+      - API_HOST_BASE=172.31.0.2:8000/api/
+    networks:
+      app_network:
+        ipv4_address: 172.31.0.3
     ports:
       - "3000:3000"
     command: yarn dev
@@ -16,6 +20,17 @@ services:
       - ./server:/server
     tty: true
     stdin_open: true
+    networks:
+      app_network:
+        ipv4_address: 172.31.0.2
     ports:
       - "8000:8000"
     command: python3 myblog/manage.py runserver 0.0.0.0:8000
+
+networks:
+  app_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/24
