@@ -6,9 +6,9 @@ from .serializer import UserSerializer, BlogSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializerclass = UserSerializer
+    serializer_class = UserSerializer
 
 class BlogViewSet(viewsets.ModelViewSet):
     queryset = Blog.objects.all()
-    serializerclass = BlogSerializer
+    serializer_class = BlogSerializer
 

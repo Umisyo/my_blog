@@ -4,10 +4,10 @@ from .models import User, Blog
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'email')
+        fields = ('name', 'mail')
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ('title', 'body', 'created_at', 'updated_at', 'status')
+        fields = ('blog_title', 'blog_text', 'created_at', 'updated_at', 'status')
 
