@@ -3,20 +3,19 @@ services:
   nuxt:
     container_name: nuxt
     build: ./docker/js
-    command: yarn dev
-    volumes: 
+    volumes:
     - ./nuxt:/nuxt
-    ports: 
+    environment:
+      - HOST=0.0.0.0
+    ports:
       - "3000:3000"
-      - "9229:9229"
-  db:
-    image: postgres:10
+    command: yarn dev
   python:
     build: ./docker/python
     volumes:
       - ./server:/server
     tty: true
+    stdin_open: true
     ports:
-      - 8000:8000
-    depends_on:
-      - db
+      - "8000:8000"
+    command: python3 myblog/manage.py runserver 0.0.0.0:8000
